@@ -1,0 +1,24 @@
+{
+  "name": "havvebot",
+  "version": "1.0.0",
+  "description": "A TWRP-themed moderation bot built for the Ladyworld Discord server.",
+  "main": "bot.js",
+  "scripts": {
+    "compile": "tsc",
+    "start": "cd dist && node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "discord-bot",
+    "ladyworld"
+  ],
+  "author": "Corvance",
+  "license": "MIT",
+  "dependencies": {
+    "@types/minimist": "^1.2.2",
+    "discord.js": "^13.7.0",
+    "dotenv": "^16.0.1",
+    "minimist": "^1.2.6"
+  }
+}
