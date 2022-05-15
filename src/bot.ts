@@ -46,16 +46,16 @@ jsFiles.forEach(commandFile => {
 client.on('messageCreate',
     function (msg) {
         const prefixedCommand: string = msg.content.split(' ')[0];
-        const commandName: string = prefixedCommand.split('s/')[1];
+        const commandName: string = prefixedCommand.split('h/')[1];
 
         let args: string = msg.content.split(/ (.*)/s)[1];
         args = (args === undefined) ? "" : args;
 
-        if ((prefixedCommand) === 's/help') {
+        if ((prefixedCommand) === 'h/help') {
             // No argument - main help.
             if (!args) {
                 let helpEmbed: MessageEmbed = new MessageEmbed({
-                    color: 0xffb900,
+                    color: 0xdddddd,
                     title: 'HavveBot - A TWRP-themed moderation bot for the Ladyworld Discord server.',
                     description: 'Use h/help [command] for more detailed help.',
                     fields: [{ name: 'Commands', value: '`' + Array.from(commands.keys()).join('`\n`') + '`', inline: false}]
