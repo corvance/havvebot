@@ -54,6 +54,21 @@ function ban(msg: Message, args: string) : void {
         }
 
         member.ban();
+
+        let numSpaces: number = (msg.content.match(/ /g) || []).length;
+        if (numSpaces === msg.mentions.members.size) {
+            msg.channel.send({embeds: [{
+                color: 0xdddddd,
+                title: `Banned ${member.displayName}.`,
+            }]});
+        }
+        else {
+            msg.channel.send({embeds: [{
+                color: 0xdddddd,
+                title: `Banned ${member.displayName}.`,
+                description: `Reason: ${msg.content.split(' ').slice(msg.mentions.members.size + 1).join(' ')}`
+            }]});
+        }
     }
     else {
         msg.channel.send({embeds: [{
