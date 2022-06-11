@@ -60,8 +60,6 @@ function ban(msg: Message, args: string): void {
             return;
         }
 
-        member.ban();
-
         let numSpaces: number = (msg.content.match(/ /g) || []).length;
         let reason: string = 'None';
         if (numSpaces === msg.mentions.members.size) {
@@ -82,6 +80,8 @@ function ban(msg: Message, args: string): void {
                 }]
             });
         }
+
+        member.ban({reason: reason});
 
         if (msg.guild) {
             let logChannel = msg.guild.channels.cache.find(channel => channel.name === 'ban-kick-log');
