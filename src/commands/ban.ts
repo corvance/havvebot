@@ -95,8 +95,8 @@ function ban(msg: Message, args: string): void {
                             description: `**Username:** ${member.displayName}${msg.author.discriminator}\n`
                                 + `**ID:** ${member.id}\n`
                                 + `**Reason:** ${reason}\n`
-                                + `**Date:** ${getCurrentDateString}\n`
-                                + `**Time:** ${getCurrentTimeString}\n`,
+                                + `**Date:** ${getCurrentDateString()}\n`
+                                + `**Time:** ${getCurrentTimeString()}\n`,
                             thumbnail: { url: member.displayAvatarURL() }
                         }]
                     });
