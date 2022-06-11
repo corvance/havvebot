@@ -12,9 +12,15 @@ let command: Command = new Command(ban, new MessageEmbed({
             value: 'A mention of the user to ban.'
         },
         {
-            name: '**Example**',
+            name: '`reason`',
+            value: 'A text string reason for the ban.'
+        },
+        {
+            name: '**Examples**',
             value: '```bash\n'
                 + 'h/ban @DoctorSung\n'
+                + 'h/ban @CommanderMeouch stop pinging all the ladies\n'
+
                 + '```'
         }
     ]

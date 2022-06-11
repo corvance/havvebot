@@ -12,12 +12,17 @@ let command: Command = new Command(mute, new MessageEmbed({
             value: 'A mention of the user to kick.'
         },
         {
-            name: '**Example**',
+            name: '`duration`',
+            value: 'An optional duration.'
+        },
+        {
+            name: '**Examples**',
             value: '```bash\n'
-            + 'h/mute @DoctorSung 1h\n'
-            + 'h/mute @DoctorSung 2d\n'
-            + 'h/mute @DoctorSung 3m\n'
-            + 'h/mute @DoctorSung 7d\n'
+            + 'h/mute @DoctorSung\n'
+            + 'h/mute @CommanderMeouch 1h\n'
+            + 'h/mute @LordPhobos 2d\n'
+            + 'h/mute @MerchlordDylan 3.5m\n'
+            + 'h/mute @Joe 7d\n'
             + '```'
         }
     ]

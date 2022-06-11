@@ -12,9 +12,14 @@ let command: Command = new Command(kick, new MessageEmbed({
             value: 'A mention of the user to kick.'
         },
         {
-            name: '**Example**',
+            name: '`reason`',
+            value: 'A text string reason for the kick.'
+        },
+        {
+            name: '**Examples**',
             value: '```bash\n'
                 + 'h/kick @DoctorSung\n'
+                + 'h/kick @Lazerhorse get back to the basement!\n'
                 + '```'
         }
     ]
