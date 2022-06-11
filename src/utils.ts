@@ -1,4 +1,4 @@
-import { Client, GuildEmoji } from "discord.js";
+import { Client, GuildEmoji, Message } from "discord.js";
 
 export function getEmoji(client: Client, emojiNameID: string) : GuildEmoji | string {
     let emoji: GuildEmoji | undefined = client.emojis.cache.get(emojiNameID);
@@ -38,4 +38,32 @@ export function getNumFromParam(param : number | string | boolean | undefined) :
         num = param;
 
     return num;
+}
+
+export function convertTimeText(timeText: string) : number | undefined {
+    // Separate number from the text i.e. 2m -> 2, 4d -> 4, 16h -> 16.
+    let time: number | undefined = getNumFromParam(timeText);
+    // Isolate the text timescale modifier i.e. h, d, m.
+    let scale: string = timeText.replace(/[0-9]/g, '');
+
+    switch (scale) {
+        case 's': time *= 1000; break;
+        case 'm': time *= 60000; break;
+        case 'h': time *= 3600000; break;
+        case 'd': time *= 86400000; break;
+        case 'w': time *= 604800000; break;
+        case 'mo': time *= 2419200000; break;
+        case 'y': time *= 29030400000; break;
+        default: time = undefined;
+    }
+
+    return time;
+}
+
+export function unknownError(msg: Message) {
+    msg.channel.send({embeds: [{
+        color: 0xdddddd,
+        title: 'Action Failed.',
+        description: '❌ Role \'Muted\' doesn\'t exist.'
+    }]});
 }
