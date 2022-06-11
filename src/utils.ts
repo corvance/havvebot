@@ -40,9 +40,24 @@ export function getNumFromParam(param: number | string | boolean | undefined): n
     return num;
 }
 
+export function getFloatFromParam(param: number | string | boolean | undefined): number {
+    let num: number = NaN;
+
+    if (typeof param === "string") {
+        if (param[0] === '"' && param[param.length - 1] === '"')
+            param = param.slice(1, -1);
+
+        num = parseFloat(param);
+    }
+    else if (param !== undefined && typeof param !== "boolean")
+        num = param;
+
+    return num;
+}
+
 export function convertTimeText(timeText: string): number | undefined {
     // Separate number from the text i.e. 2m -> 2, 4d -> 4, 16h -> 16.
-    let time: number | undefined = getNumFromParam(timeText);
+    let time: number | undefined = getFloatFromParam(timeText);
     // Isolate the text timescale modifier i.e. h, d, m.
     let scale: string = timeText.replace(/[0-9]/g, '');
 
