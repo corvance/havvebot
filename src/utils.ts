@@ -1,21 +1,21 @@
 import { Client, GuildEmoji, Message } from "discord.js";
 
-export function getEmoji(client: Client, emojiNameID: string) : GuildEmoji | string {
+export function getEmoji(client: Client, emojiNameID: string): GuildEmoji | string {
     let emoji: GuildEmoji | undefined = client.emojis.cache.get(emojiNameID);
     return (emoji === undefined) ? emojiNameID : emoji;
 }
 
-export function dateToUNIXTimestamp(date: Date) : string {
+export function dateToUNIXTimestamp(date: Date): string {
     return `<t:${Math.floor(date.getTime() / 1000)}:R>`;
 }
 
-export function splitOnSpaceExceptQuotedBracketed(splitstr: string) : string[] {
+export function splitOnSpaceExceptQuotedBracketed(splitstr: string): string[] {
     let arr: RegExpMatchArray | null =
         splitstr.match(/(?:(["'])(\\.|(?!\1)[^\\])*\1|\[(?:(["'])(\\.|(?!\2)[^\\])*\2|[^\]])*\]|\((?:(["'])(\\.|(?!\3)[^\\])*\3|[^)])*\)|[^ ])+/g);
     return (arr === null) ? [] : arr;
 }
 
-export function formatStringArg(arg: string) : string {
+export function formatStringArg(arg: string): string {
     if (arg[0] === '"' && arg[arg.length - 1] === '"')
         arg = arg.slice(1, -1);
 
@@ -25,7 +25,7 @@ export function formatStringArg(arg: string) : string {
     return arg;
 }
 
-export function getNumFromParam(param : number | string | boolean | undefined) : number {
+export function getNumFromParam(param: number | string | boolean | undefined): number {
     let num: number = NaN;
 
     if (typeof param === "string") {
@@ -40,7 +40,7 @@ export function getNumFromParam(param : number | string | boolean | undefined) :
     return num;
 }
 
-export function convertTimeText(timeText: string) : number | undefined {
+export function convertTimeText(timeText: string): number | undefined {
     // Separate number from the text i.e. 2m -> 2, 4d -> 4, 16h -> 16.
     let time: number | undefined = getNumFromParam(timeText);
     // Isolate the text timescale modifier i.e. h, d, m.
@@ -61,9 +61,21 @@ export function convertTimeText(timeText: string) : number | undefined {
 }
 
 export function unknownError(msg: Message) {
-    msg.channel.send({embeds: [{
-        color: 0xdddddd,
-        title: 'Action Failed.',
-        description: '❌ Role \'Muted\' doesn\'t exist.'
-    }]});
+    msg.channel.send({
+        embeds: [{
+            color: 0xdddddd,
+            title: 'Action Failed.',
+            description: '❌ Role \'Muted\' doesn\'t exist.'
+        }]
+    });
+}
+
+export function getCurrentDateString() {
+    let date = new Date();
+    return ((date.getDate() < 10) ? "0" : "") + date.getDate() + "/" + (((date.getMonth() + 1) < 10) ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear();
+}
+
+export function getCurrentTimeString() {
+    let date = new Date();
+    return ((date.getHours() < 10) ? "0" : "") + date.getHours() + ":" + ((date.getMinutes() < 10) ? "0" : "") + date.getMinutes() + ":" + ((date.getSeconds() < 10) ? "0" : "") + date.getSeconds();
 }
