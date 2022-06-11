@@ -92,7 +92,7 @@ function kick(msg: Message, args: string): void {
                         embeds: [{
                             color: 0xdddddd,
                             title: 'Banned User.',
-                            description: `**Username:** ${member.displayName}${msg.author.discriminator}\n`
+                            description: `**Username:** ${member.displayName}#${msg.author.discriminator}\n`
                                 + `**ID:** ${member.id}\n`
                                 + `**Reason:** ${reason}\n`
                                 + `**Date:** ${getCurrentDateString()}\n`
