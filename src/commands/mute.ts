@@ -1,6 +1,6 @@
 import { GuildMember, Message, MessageEmbed, Permissions} from "discord.js";
 import { Command } from '../command'
-import { getNumFromParam, convertTimeText, unknownError } from '../utils';
+import { getNumFromParam, convertTimeTextToSeconds, setTimeoutSeconds, unknownError } from '../utils';
 
 let command: Command = new Command(mute, new MessageEmbed({
     color: 0xdddddd,
@@ -81,9 +81,9 @@ function mute(msg: Message, args: string) : void {
                     }]});
                 }
                 else {
-                    let durationMS: number | undefined = convertTimeText(msg.content.slice(msg.content.lastIndexOf(' ') + 1));
+                    let durationSecs: number | undefined = convertTimeTextToSeconds(msg.content.slice(msg.content.lastIndexOf(' ') + 1));
 
-                    if (durationMS === undefined) {
+                    if (durationSecs === undefined) {
                         member.roles.remove(mutedRole);
 
                         msg.channel.send({embeds: [{
@@ -98,7 +98,7 @@ function mute(msg: Message, args: string) : void {
                             color: 0xdddddd,
                             title: `Muted ${member.displayName} for ${msg.content.slice(msg.content.lastIndexOf(' ') + 1)}.`
                         }]});
-                        setTimeout(async () => {
+                        setTimeoutSeconds(async () => {
                             if (member) {
                                 // The member may have left or deleted their profile.
                                 member.fetch(true).then(fetchedMember => {
@@ -111,7 +111,7 @@ function mute(msg: Message, args: string) : void {
                                     }
                                 });
                             }
-                        }, durationMS);
+                        }, durationSecs);
                     }
                 }
             }

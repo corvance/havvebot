@@ -55,24 +55,44 @@ export function getFloatFromParam(param: number | string | boolean | undefined):
     return num;
 }
 
-export function convertTimeText(timeText: string): number | undefined {
+export function convertTimeTextToSeconds(timeText: string): number | undefined {
     // Separate number from the text i.e. 2m -> 2, 4d -> 4, 16h -> 16.
     let time: number | undefined = getFloatFromParam(timeText);
     // Isolate the text timescale modifier i.e. h, d, m.
     let scale: string = timeText.replace(/[0-9]/g, '');
 
     switch (scale) {
-        case 's': time *= 1000; break;
-        case 'm': time *= 60000; break;
-        case 'h': time *= 3600000; break;
-        case 'd': time *= 86400000; break;
-        case 'w': time *= 604800000; break;
-        case 'mo': time *= 2419200000; break;
-        case 'y': time *= 29030400000; break;
+        case 's': time *= 1; break;
+        case 'm': time *= 60; break;
+        case 'h': time *= 3600; break;
+        case 'd': time *= 86400; break;
+        case 'w': time *= 604800; break;
+        case 'mo': time *= 2419200; break;
+        case 'y': time *= 29030400; break;
         default: time = undefined;
     }
 
+    if (time)
+        // Cap at 1000 years.
+        if (time > 29030400000)
+            time = 29030400000;
+
     return time;
+}
+export function setTimeoutSeconds(callback: Function, seconds: number) : void {
+    // 1000 ms in a second.
+    let msInSecond = 1000;
+
+    let secondCount = 0;
+    let timer = setInterval(function() {
+        secondCount++;  // A second has passed.
+
+        if (secondCount === seconds) {
+           clearInterval(timer);
+           // @ts-ignore
+           callback.apply(this, []);
+        }
+    }, msInSecond);
 }
 
 export function unknownError(msg: Message) {
