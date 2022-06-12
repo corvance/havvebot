@@ -1,5 +1,7 @@
 import { Client, GuildEmoji, Message } from "discord.js";
 
+export let BOT_COLOR: number = 0xdddddd;
+
 export function getEmoji(client: Client, emojiNameID: string): GuildEmoji | string {
     let emoji: GuildEmoji | undefined = client.emojis.cache.get(emojiNameID);
     return (emoji === undefined) ? emojiNameID : emoji;
@@ -98,7 +100,7 @@ export function setTimeoutSeconds(callback: Function, seconds: number) : void {
 export function unknownError(msg: Message) {
     msg.channel.send({
         embeds: [{
-            color: 0xdddddd,
+            color: BOT_COLOR,
             title: 'Action Failed.',
             description: '❌ Role \'Muted\' doesn\'t exist.'
         }]

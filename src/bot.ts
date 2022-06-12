@@ -3,6 +3,7 @@ de.config();
 
 import { Client, Intents, MessageEmbed } from 'discord.js';
 import * as fs from 'fs';
+import { BOT_COLOR } from './utils';
 
 const client: Client = new Client(
     {
@@ -55,7 +56,7 @@ client.on('messageCreate',
             // No argument - main help.
             if (!args) {
                 let helpEmbed: MessageEmbed = new MessageEmbed({
-                    color: 0xdddddd,
+                    color: BOT_COLOR,
                     title: 'HavveBot - A TWRP-themed moderation bot for the Ladyworld Discord server.',
                     description: 'Use h/help [command] for more detailed help.',
                     fields: [{ name: 'Commands', value: '`' + Array.from(commands.keys()).join('`\n`') + '`', inline: false}]

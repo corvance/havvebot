@@ -1,9 +1,9 @@
 import { GuildMember, Message, MessageEmbed, Permissions} from "discord.js";
 import { Command } from '../command'
-import { getNumFromParam, convertTimeTextToSeconds, setTimeoutSeconds, unknownError } from '../utils';
+import { BOT_COLOR, convertTimeTextToSeconds, setTimeoutSeconds, unknownError } from '../utils';
 
 let command: Command = new Command(mute, new MessageEmbed({
-    color: 0xdddddd,
+    color: BOT_COLOR,
     title: 'mute',
     description: 'Mutes a user indefinitely or for a specified amount of time.',
     fields: [
@@ -36,7 +36,7 @@ module.exports = {
 function mute(msg: Message, args: string) : void {
     if (!msg.member || !msg.member.permissions.has(Permissions.FLAGS.MUTE_MEMBERS)) {
         msg.channel.send({embeds: [{
-            color: 0xdddddd,
+            color: BOT_COLOR,
             title: 'Action Failed.',
             description: '❌ You don\'t have the right permission to do that.'
         }]});
@@ -47,7 +47,7 @@ function mute(msg: Message, args: string) : void {
         let member : GuildMember | undefined = msg.mentions.members.first();
         if (!member) {
             msg.channel.send({embeds: [{
-                color: 0xdddddd,
+                color: BOT_COLOR,
                 title: 'Action Failed.',
                 description: '❌ Invalid server member.'
             }]});
@@ -55,7 +55,7 @@ function mute(msg: Message, args: string) : void {
         }
         if (!member.kickable) {
             msg.channel.send({embeds: [{
-                color: 0xdddddd,
+                color: BOT_COLOR,
                 title: 'Action Failed.',
                 description: '❌ You can\'t mute that member.'
             }]});
@@ -76,7 +76,7 @@ function mute(msg: Message, args: string) : void {
                     member.roles.add(mutedRole);
 
                     msg.channel.send({embeds: [{
-                        color: 0xdddddd,
+                        color: BOT_COLOR,
                         title: `Muted ${member.displayName}.`
                     }]});
                 }
@@ -87,7 +87,7 @@ function mute(msg: Message, args: string) : void {
                         member.roles.remove(mutedRole);
 
                         msg.channel.send({embeds: [{
-                            color: 0xdddddd,
+                            color: BOT_COLOR,
                             title: 'Action Failed.',
                             description: '❌ Invalid duration.'
                         }]});
@@ -95,7 +95,7 @@ function mute(msg: Message, args: string) : void {
                     else {
                         member.roles.add(mutedRole);
                         msg.channel.send({embeds: [{
-                            color: 0xdddddd,
+                            color: BOT_COLOR,
                             title: `Muted ${member.displayName} for ${msg.content.slice(msg.content.lastIndexOf(' ') + 1)}.`
                         }]});
                         setTimeoutSeconds(async () => {
@@ -117,7 +117,7 @@ function mute(msg: Message, args: string) : void {
             }
             else {
                 msg.channel.send({embeds: [{
-                    color: 0xdddddd,
+                    color: BOT_COLOR,
                     title: 'Action Failed.',
                     description: '❌ Role \'Muted\' doesn\'t exist.'
                 }]});
@@ -131,7 +131,7 @@ function mute(msg: Message, args: string) : void {
     }
     else {
         msg.channel.send({embeds: [{
-            color: 0xdddddd,
+            color: BOT_COLOR,
             title: 'Action Failed.',
             description: '❌ You must mention a member to mute.'
         }]});

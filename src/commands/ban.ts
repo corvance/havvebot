@@ -1,9 +1,9 @@
 import { GuildMember, Message, MessageEmbed, Permissions } from "discord.js";
 import { Command } from '../command'
-import { getCurrentDateString, getCurrentTimeString } from "../utils";
+import { BOT_COLOR, getCurrentDateString, getCurrentTimeString } from "../utils";
 
 let command: Command = new Command(ban, new MessageEmbed({
-    color: 0xdddddd,
+    color: BOT_COLOR,
     title: 'Ban',
     description: 'Bans a user.',
     fields: [
@@ -35,7 +35,7 @@ function ban(msg: Message, args: string): void {
     if (!msg.member || !msg.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
         msg.channel.send({
             embeds: [{
-                color: 0xdddddd,
+                color: BOT_COLOR,
                 title: 'Action Failed.',
                 description: '❌ You don\'t have the right permission to do that.'
             }]
@@ -48,7 +48,7 @@ function ban(msg: Message, args: string): void {
         if (!member) {
             msg.channel.send({
                 embeds: [{
-                    color: 0xdddddd,
+                    color: BOT_COLOR,
                     title: 'Action Failed.',
                     description: '❌ Invalid server member.'
                 }]
@@ -58,7 +58,7 @@ function ban(msg: Message, args: string): void {
         if (!member.bannable) {
             msg.channel.send({
                 embeds: [{
-                    color: 0xdddddd,
+                    color: BOT_COLOR,
                     title: 'Action Failed.',
                     description: '❌ You can\'t ban that member.'
                 }]
@@ -71,7 +71,7 @@ function ban(msg: Message, args: string): void {
         if (numSpaces === msg.mentions.members.size) {
             msg.channel.send({
                 embeds: [{
-                    color: 0xdddddd,
+                    color: BOT_COLOR,
                     title: `Banned ${member.displayName}.`,
                 }]
             });
@@ -80,7 +80,7 @@ function ban(msg: Message, args: string): void {
             reason = msg.content.split(' ').slice(msg.mentions.members.size + 1).join(' ');
             msg.channel.send({
                 embeds: [{
-                    color: 0xdddddd,
+                    color: BOT_COLOR,
                     title: `Banned ${member.displayName}.`,
                     description: `Reason: ${reason}`
                 }]
@@ -96,7 +96,7 @@ function ban(msg: Message, args: string): void {
                 if (logChannel.isText()) {
                     logChannel.send({
                         embeds: [{
-                            color: 0xdddddd,
+                            color: BOT_COLOR,
                             title: 'Banned User.',
                             description: `**Username:** ${member.displayName}#${msg.author.discriminator}\n`
                                 + `**ID:** ${member.id}\n`
@@ -113,7 +113,7 @@ function ban(msg: Message, args: string): void {
     else {
         msg.channel.send({
             embeds: [{
-                color: 0xdddddd,
+                color: BOT_COLOR,
                 title: 'Action Failed.',
                 description: '❌ You must mention a member to ban.'
             }]

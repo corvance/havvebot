@@ -1,7 +1,9 @@
 import { Message, MessageEmbed } from "discord.js";
 import { Command } from '../command'
+import { BOT_COLOR } from '../utils';
 
-let command: Command = new Command(ping, new MessageEmbed({color: 0xdddddd, description: 'Responds with ping latency info.'}));
+
+let command: Command = new Command(ping, new MessageEmbed({color: BOT_COLOR, description: 'Responds with ping latency info.'}));
 
 module.exports = {
     name: "ping",
